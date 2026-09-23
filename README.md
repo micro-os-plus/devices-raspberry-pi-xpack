@@ -1,2 +1,2 @@
-# devices-raspberry-pi-xpack
-A source code library with support code for running tests on Raspberry Pi devices
+This project does not use the `master` branch, please
+switch to the `xpack` branch to access the project files.
