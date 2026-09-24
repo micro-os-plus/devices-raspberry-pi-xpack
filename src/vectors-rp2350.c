@@ -15,8 +15,13 @@
 
 // ----------------------------------------------------------------------------
 
-#include "micro-os-plus/architecture.h"
+#include "micro-os-plus/device.h"
 #include "micro-os-plus/architecture-cortexm/exception-handlers.h"
+
+// ----------------------------------------------------------------------------
+
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
+    defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -292,5 +297,10 @@ Default_Handler(void)
       micro_os_plus_architecture_wfi();
     }
 }
+
+// ----------------------------------------------------------------------------
+
+#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && 
+          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED) */
 
 // ----------------------------------------------------------------------------

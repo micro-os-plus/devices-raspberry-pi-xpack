@@ -19,10 +19,11 @@
 #
 # This creates dependencies that can be linked to a target with:
 #
-# `dependencies: [micro_os_plus_devices_raspberry_pi_dependency],`
+# `dependencies: [micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency],`
+# `dependencies: [micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency],`
 # `dependencies: [micro_os_plus_devices_raspberry_pi_vectors_rp2040_dependency],`
-# `dependencies: [micro_os_plus_devices_raspberry_pi_vectors_rp2350_dependency],`
-# `dependencies: [micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency],`
+# `dependencies: [micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency],`
+# `dependencies: [micro_os_plus_devices_raspberry_pi_dependency],`
 
 # Note: the Meson configuration is provided only as a proof of concept;
 # for production it might need some refinements.
@@ -49,17 +50,12 @@ _local_dependencies = []
 _local_link_args = []
 _local_link_with = []
 
-_local_include_directories += [
-  'include',
-]
-
-_local_dependencies += [
-  micro_os_plus_diag_trace_dependency,
-  micro_os_plus_architecture_dependency,
+_local_sources += [
+  'src/_sbrk.c',
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
-micro_os_plus_devices_raspberry_pi_dependency = declare_dependency(
+micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency = declare_dependency(
   include_directories: include_directories(_local_include_directories),
   compile_args: _local_compile_args,
   sources: files(_local_sources),
@@ -70,8 +66,8 @@ micro_os_plus_devices_raspberry_pi_dependency = declare_dependency(
 
 # Meson dependencies cannot differentiate between C and C++ compile args;
 # they are therefore exposed as separate variables alongside the dependency.
-micro_os_plus_devices_raspberry_pi_dependency_compile_c_args = _local_compile_c_args
-micro_os_plus_devices_raspberry_pi_dependency_compile_cpp_args = _local_compile_cpp_args
+micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency_compile_c_args = _local_compile_c_args
+micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency_compile_cpp_args = _local_compile_cpp_args
 
 foreach name : _local_include_directories
   message('+ -I ' + name)
@@ -79,32 +75,7 @@ endforeach
 foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
   message('+ ' + name)
 endforeach
-message('> micro_os_plus_devices_raspberry_pi_dependency')
-
-# -----------------------------------------------------------------------------
-# Alias.
-
-_dependency = declare_dependency(
-  include_directories: include_directories(_local_include_directories),
-  compile_args: _local_compile_args,
-  sources: files(_local_sources),
-  dependencies: _local_dependencies,
-  link_args: _local_link_args,
-  link_with: _local_link_with,
-)
-
-# Meson dependencies cannot differentiate between C and C++ compile args;
-# they are therefore exposed as separate variables alongside the dependency.
-_dependency_compile_c_args = _local_compile_c_args
-_dependency_compile_cpp_args = _local_compile_cpp_args
-
-foreach name : _local_include_directories
-  message('+ -I ' + name)
-endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
-  message('+ ' + name)
-endforeach
-message('> _dependency')
+message('> micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency')
 
 # -----------------------------------------------------------------------------
 
@@ -119,11 +90,58 @@ _local_link_args = []
 _local_link_with = []
 
 _local_sources += [
-  'rp2040/src/vectors-rp2040.c',
+  'src/system-clock.cpp',
+]
+
+# https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
+micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency = declare_dependency(
+  include_directories: include_directories(_local_include_directories),
+  compile_args: _local_compile_args,
+  sources: files(_local_sources),
+  dependencies: _local_dependencies,
+  link_args: _local_link_args,
+  link_with: _local_link_with,
+)
+
+# Meson dependencies cannot differentiate between C and C++ compile args;
+# they are therefore exposed as separate variables alongside the dependency.
+micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency_compile_c_args = _local_compile_c_args
+micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency_compile_cpp_args = _local_compile_cpp_args
+
+foreach name : _local_include_directories
+  message('+ -I ' + name)
+endforeach
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+  message('+ ' + name)
+endforeach
+message('> micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency')
+
+# -----------------------------------------------------------------------------
+
+_local_compile_args = [] # Common C/C++ args.
+_local_compile_c_args = [] # C only args.
+_local_compile_cpp_args = [] # C++ only args.
+_local_include_directories = []
+_local_sources = []
+_local_compile_definitions = []
+_local_dependencies = []
+_local_link_args = []
+_local_link_with = []
+
+_local_include_directories += [
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2040/Include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2040/hardware_regs/include',
+]
+
+_local_sources += [
+  'src/vectors-rp2040.c',
+  'src/system-rp2xxx.cpp',
+  'src/bs2_default_padded_checksummed.S',
 ]
 
 _local_dependencies += [
-  micro_os_plus_architecture_dependency,
+  micro_os_plus_device_dependency,
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
@@ -161,16 +179,25 @@ _local_dependencies = []
 _local_link_args = []
 _local_link_with = []
 
+_local_include_directories += [
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2350/Include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include',
+]
+
 _local_sources += [
-  'rp2350/src/vectors-rp2350.c',
+  'src/vectors-rp2350.c',
+  'src/system-rp2xxx.cpp',
+  'src/embedded-block-rp2350-arm.c',
 ]
 
 _local_dependencies += [
-  micro_os_plus_architecture_dependency,
+  micro_os_plus_device_dependency,
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
-micro_os_plus_devices_raspberry_pi_vectors_rp2350_dependency = declare_dependency(
+micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency = declare_dependency(
   include_directories: include_directories(_local_include_directories),
   compile_args: _local_compile_args,
   sources: files(_local_sources),
@@ -181,8 +208,8 @@ micro_os_plus_devices_raspberry_pi_vectors_rp2350_dependency = declare_dependenc
 
 # Meson dependencies cannot differentiate between C and C++ compile args;
 # they are therefore exposed as separate variables alongside the dependency.
-micro_os_plus_devices_raspberry_pi_vectors_rp2350_dependency_compile_c_args = _local_compile_c_args
-micro_os_plus_devices_raspberry_pi_vectors_rp2350_dependency_compile_cpp_args = _local_compile_cpp_args
+micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency_compile_c_args = _local_compile_c_args
+micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency_compile_cpp_args = _local_compile_cpp_args
 
 foreach name : _local_include_directories
   message('+ -I ' + name)
@@ -190,7 +217,7 @@ endforeach
 foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
   message('+ ' + name)
 endforeach
-message('> micro_os_plus_devices_raspberry_pi_vectors_rp2350_dependency')
+message('> micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency')
 
 # -----------------------------------------------------------------------------
 
@@ -204,12 +231,23 @@ _local_dependencies = []
 _local_link_args = []
 _local_link_with = []
 
+_local_include_directories += [
+  'include',
+]
+
 _local_sources += [
-  'src/_sbrk.c',
+  'src/system-rp2xxx.cpp',
+]
+
+_local_dependencies += [
+  micro_os_plus_diag_trace_dependency,
+  micro_os_plus_architecture_dependency,
+  micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency,
+  micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency,
 ]
 
 # https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
-micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency = declare_dependency(
+micro_os_plus_devices_raspberry_pi_dependency = declare_dependency(
   include_directories: include_directories(_local_include_directories),
   compile_args: _local_compile_args,
   sources: files(_local_sources),
@@ -220,8 +258,8 @@ micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency = declare_dependency(
 
 # Meson dependencies cannot differentiate between C and C++ compile args;
 # they are therefore exposed as separate variables alongside the dependency.
-micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency_compile_c_args = _local_compile_c_args
-micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency_compile_cpp_args = _local_compile_cpp_args
+micro_os_plus_devices_raspberry_pi_dependency_compile_c_args = _local_compile_c_args
+micro_os_plus_devices_raspberry_pi_dependency_compile_cpp_args = _local_compile_cpp_args
 
 foreach name : _local_include_directories
   message('+ -I ' + name)
@@ -229,6 +267,31 @@ endforeach
 foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
   message('+ ' + name)
 endforeach
-message('> micro_os_plus_devices_raspberry_pi_sdk_sbrk_dependency')
+message('> micro_os_plus_devices_raspberry_pi_dependency')
+
+# -----------------------------------------------------------------------------
+# Alias.
+
+micro_os_plus_device_dependency = declare_dependency(
+  include_directories: include_directories(_local_include_directories),
+  compile_args: _local_compile_args,
+  sources: files(_local_sources),
+  dependencies: _local_dependencies,
+  link_args: _local_link_args,
+  link_with: _local_link_with,
+)
+
+# Meson dependencies cannot differentiate between C and C++ compile args;
+# they are therefore exposed as separate variables alongside the dependency.
+micro_os_plus_device_dependency_compile_c_args = _local_compile_c_args
+micro_os_plus_device_dependency_compile_cpp_args = _local_compile_cpp_args
+
+foreach name : _local_include_directories
+  message('+ -I ' + name)
+endforeach
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+  message('+ ' + name)
+endforeach
+message('> micro_os_plus_device_dependency')
 
 # -----------------------------------------------------------------------------

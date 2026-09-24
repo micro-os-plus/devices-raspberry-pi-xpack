@@ -25,14 +25,25 @@
 
 // ----------------------------------------------------------------------------
 
+#include "micro-os-plus/device.h"
+
+// ----------------------------------------------------------------------------
+
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED)
+
+// ----------------------------------------------------------------------------
+
 #define false 0
 
 extern char __StackLimit; /* Set by linker.  */
+extern char end; /* Set by linker.  */
+
+void*
+_sbrk (int incr);
 
 __attribute__ ((weak)) void*
 _sbrk (int incr)
 {
-  extern char end; /* Set by linker.  */
   static char* heap_end;
   char* prev_heap_end;
 
@@ -44,7 +55,7 @@ _sbrk (int incr)
 
   if (__builtin_expect (next_heap_end > (&__StackLimit), false))
     {
-#if PICO_USE_OPTIMISTIC_SBRK
+#if defined(PICO_USE_OPTIMISTIC_SBRK) && PICO_USE_OPTIMISTIC_SBRK
       if (heap_end == &__StackLimit)
         {
           //        errno = ENOMEM;
@@ -59,5 +70,9 @@ _sbrk (int incr)
   heap_end = next_heap_end;
   return (void*)prev_heap_end;
 }
+
+// ----------------------------------------------------------------------------
+
+#endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED)
 
 // ----------------------------------------------------------------------------

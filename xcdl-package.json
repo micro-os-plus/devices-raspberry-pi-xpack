@@ -11,15 +11,18 @@
       "display": "Raspberry Pi devices",
       "description": "The Raspberry Pi devices definitions",
       "publicIncludeFolders": [
-        "include"
+        "include",
+        // Header-only register bit-field definitions used to bring up the
+        // clocks without CMSIS headers (not available for RISC-V).
       ],
       "sourceFiles": [
-        
+        "src/system-rp2xxx.cpp"
       ],
       "$comment": "Clarify how to use the device definition, known in the platform",
       "dependencies": [
         "micro-os-plus.diag.trace",
         "micro-os-plus.architecture"
+        // Pico SDK, but can't represent here.
       ],
       "implementedInterfaces": [
         "micro-os-plus.device"
@@ -37,46 +40,73 @@
           "valueType": "string",
           "legalValues": [
             "rp2040",
-            "rp2350"
+            "rp2350-arm",
+            "rp2350-riscv"
           ],
           // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE"
           // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040
-          // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350
+          // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_ARM
         }
+      ],
+      "cdlComponents": [
+        {
+          "id": "micro-os-plus.devices.raspberry-pi.sdk-sbrk",
+          "display": "SDK _sbrk()",
+          "description": "The SDK _sbrk() implementation for the RPxxxx",
+          "sourceFiles": [
+            "src/_sbrk.c"
+          ],
+          // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED"
+        },
+        {
+          "id": "micro-os-plus.devices.raspberry-pi.system-clock",
+          "display": "System clock",
+          "description": "The system clock implementation for the RPxxxx",
+          "sourceFiles": [
+            "src/system-clock.cpp"
+          ],
+          // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED"
+        },
       ]
     },
     {
       "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2040",
       "display": "RP2040 vectors",
-      "description": "The RP2040 interrupt vectors",
+      "description": "The RP2040 Cortex-M0+ interrupt vectors",
+      "publicIncludeFolders": [
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2040/Include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2040/hardware_regs/include"
+      ],
       "sourceFiles": [
-        "rp2040/src/vectors-rp2040.c"
+        "src/vectors-rp2040.c",
+        "src/system-rp2xxx.cpp",
+        "src/bs2_default_padded_checksummed.S"
       ],
       "dependencies": [
-        "micro-os-plus.architecture"
+        "micro-os-plus.device"
       ],
       // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED"
     },
     {
-      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2350",
-      "display": "RP2350 vectors",
-      "description": "The RP2350 interrupt vectors",
+      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2350-arm",
+      "display": "RP2350 Cortex-M33 vectors",
+      "description": "The RP2350 Cortex-M33 core interrupt vectors",
+      "publicIncludeFolders": [
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2350/Include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include"
+      ],
       "sourceFiles": [
-        "rp2350/src/vectors-rp2350.c"
+        "src/vectors-rp2350.c",
+        "src/system-rp2xxx.cpp",
+        "src/embedded-block-rp2350-arm.c"
       ],
       "dependencies": [
-        "micro-os-plus.architecture"
+        "micro-os-plus.device"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ENABLED"
-    },
-    {
-      "id": "micro-os-plus.devices.raspberry-pi.sdk-sbrk",
-      "display": "SDK _sbrk()",
-      "description": "The SDK _sbrk() implementation for the RPxxxx",
-      "sourceFiles": [
-        "src/_sbrk.c"
-      ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED"
     },
   ]
 }
