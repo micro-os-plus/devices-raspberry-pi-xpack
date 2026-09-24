@@ -1,6 +1,6 @@
 {
   "name": "@micro-os-plus/devices-raspberry-pi",
-  "version": "5.0.1",
+  "version": "0.1.0",
   "description": "A source code library with Raspberry Pi device components",
   "keywords": [
     "xpack",
