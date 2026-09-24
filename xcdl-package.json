@@ -1,0 +1,82 @@
+{
+  "$schema": "https://xpack.github.io/xcdl/schemas/xcdl-2.0.0.json",
+  "minimumXcdlRequired": "2.0.0",
+  "license": "MIT",
+  "copyright": "Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.",
+  "description": "Raspberry Pi device components",
+  "cdlComponents": [
+    {
+      "id": "micro-os-plus.devices.raspberry-pi",
+      "alias": "micro-os-plus.device",
+      "display": "Raspberry Pi devices",
+      "description": "The Raspberry Pi devices definitions",
+      "publicIncludeFolders": [
+        "include"
+      ],
+      "sourceFiles": [
+        
+      ],
+      "$comment": "Clarify how to use the device definition, known in the platform",
+      "dependencies": [
+        "micro-os-plus.diag.trace",
+        "micro-os-plus.architecture"
+      ],
+      "implementedInterfaces": [
+        "micro-os-plus.device"
+      ],
+      "generatedFile": {
+        "type": "c-header",
+        "filePath": "{{buildFolderPath}}/generated/include/micro-os-plus/device-defines.h"
+      },
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED",
+      "cdlOptions": [
+        {
+          "id": "core",
+          "display": "CPU core",
+          "description": "Select the Raspberry Pi CPU",
+          "valueType": "string",
+          "legalValues": [
+            "rp2040",
+            "rp2350"
+          ],
+          // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE"
+          // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040
+          // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350
+        }
+      ]
+    },
+    {
+      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2040",
+      "display": "RP2040 vectors",
+      "description": "The RP2040 interrupt vectors",
+      "sourceFiles": [
+        "rp2040/src/vectors-rp2040.c"
+      ],
+      "dependencies": [
+        "micro-os-plus.architecture"
+      ],
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED"
+    },
+    {
+      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2350",
+      "display": "RP2350 vectors",
+      "description": "The RP2350 interrupt vectors",
+      "sourceFiles": [
+        "rp2350/src/vectors-rp2350.c"
+      ],
+      "dependencies": [
+        "micro-os-plus.architecture"
+      ],
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ENABLED"
+    },
+    {
+      "id": "micro-os-plus.devices.raspberry-pi.sdk-sbrk",
+      "display": "SDK _sbrk()",
+      "description": "The SDK _sbrk() implementation for the RPxxxx",
+      "sourceFiles": [
+        "src/_sbrk.c"
+      ],
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED"
+    },
+  ]
+}
