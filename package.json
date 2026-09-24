@@ -1,0 +1,74 @@
+{
+  "name": "@micro-os-plus/devices-raspberry-pi",
+  "version": "5.0.1",
+  "description": "A source code library with Raspberry Pi device components",
+  "keywords": [
+    "xpack",
+    "micro-os-plus",
+    "c++",
+    "raspberry-pi"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micro-os-plus/devices-raspberry-pi-xpack.git"
+  },
+  "homepage": "https://micro-os-plus.github.io/devices-raspberry-pi-xpack/",
+  "homepagePreview": "https://micro-os-plus.github.io/devices-raspberry-pi-xpack-webpreview/",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/devices-raspberry-pi-xpack/issues"
+  },
+  "$dependenciesUrls": {
+    "del-cli": "https://www.npmjs.com/package/del-cli",
+    "json": "https://www.npmjs.com/package/json",
+    "liquidjs": "https://www.npmjs.com/package/liquidjs",
+    "glob": "https://www.npmjs.com/package/glob",
+    "json5": "https://www.npmjs.com/package/json5",
+    "jsonc-parser": "https://www.npmjs.com/package/jsonc-parser"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@xpack/npm-packages-helper": "github:xpack/npm-packages-helper",
+    "del-cli": "^7.0.0",
+    "glob": "^13.0.6",
+    "json": "^11.0.0",
+    "json5": "^2.2.3",
+    "jsonc-parser": "^3.3.1",
+    "liquidjs": "^10.25.0",
+    "prettier": "^3.9.6"
+  },
+  "scripts": {
+    "generate-top-commons": "node node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.mjs --micro-os-plus",
+    "npm-install": "npm install",
+    "npm-link-helpers": "npm link @xpack/npm-packages-helper",
+    "npm-outdated": "npm outdated",
+    "npm-ci": "npm ci",
+    "npm-pack": "npm pack",
+    "npm-link": "npm link",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short",
+    "git-pull-helper": "git -C ${HOME}/Work/micro-os-plus/build-helper-xpack.git pull",
+    "deep-clean": "del-cli node_modules package-lock.json *.tgz",
+    "postversion": "git push origin --all && git push origin --tags"
+  },
+  "xpack": {
+    "minimumXpmRequired": "0.20.8",
+    "devDependencies": {
+      "@xpack-dev-tools/clang": "21.1.8-1.1"
+    },
+    "actions": {
+      "clang-format": "node scripts/clang-format.mjs",
+      "cmake-format": "node scripts/cmake-format.mjs",
+      "jsonc-format": "node scripts/jsonc-format.mjs",
+      "xcdl-export": "node scripts/xcdl-export.mjs xcdl-package.json*",
+      "prettier": "prettier scripts tests/scripts --write --config config/.prettierrc.json --ignore-path config/.prettierignore"
+    }
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}
