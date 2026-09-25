@@ -15,10 +15,10 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-    && (defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) \
-        || defined( \
-            MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED))
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED)
+
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) \
+    || defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -28,12 +28,6 @@
 // given matching C language linkage.
 extern "C" uint32_t SystemCoreClock;
 uint32_t SystemCoreClock;
-
-// A private instance, used only to read back the clock configuration;
-// distinct from the one `src/hooks.cpp` uses to bring the clock up in
-// `micro_os_plus_startup_initialise_hardware_early_hook()`, since
-// `device::system_clock` carries no state of its own.
-device::system_clock system_clock;
 
 extern "C" void
 SystemInit (void)
@@ -49,9 +43,9 @@ SystemCoreClockUpdate (void)
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-    && (defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) \
-        || defined( \
-            MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED)) */
+#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) || \
+          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED)) */
+
+#endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED)
 
 // ----------------------------------------------------------------------------

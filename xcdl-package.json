@@ -69,6 +69,9 @@
         },
       ]
     },
+    // These two should be mutually exclusive, depending on the selected CPU core,
+    // and located inside the parent. Due to current xcdl-export limitations,
+    // they are temporarily placed outside their parent.
     {
       "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2040",
       "display": "RP2040 vectors",
@@ -79,9 +82,9 @@
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2040/hardware_regs/include"
       ],
       "sourceFiles": [
-        "src/vectors-rp2040.c",
+        "src/rp2040/vectors-rp2040.c",
         "src/system-rp2xxx.cpp",
-        "src/bs2_default_padded_checksummed.S"
+        "src/rp2040/bs2_default_padded_checksummed.S"
       ],
       "dependencies": [
         "micro-os-plus.device"
@@ -99,14 +102,44 @@
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include"
       ],
       "sourceFiles": [
-        "src/vectors-rp2350.c",
+        "src/rp2350-arm/vectors-rp2350.c",
         "src/system-rp2xxx.cpp",
-        "src/embedded-block-rp2350-arm.c"
+        "src/rp2350-arm/embedded-block-rp2350-arm.c"
       ],
       "dependencies": [
         "micro-os-plus.device"
       ],
       // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED"
+    },
+    {
+      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2350-riscv",
+      "display": "RP2350 RISC-V support",
+      "description": "The RP2350 RISC-V core support",
+      "publicDefines": [
+        "NO_PICO_PLATFORM"
+      ],
+      "publicIncludeFolders": [
+        // "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/pico_bootrom/include",
+        // "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/boot_bootrom_headers/include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include",
+        // /"${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/pico_platform/include",
+        // /"${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include",
+
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include",
+        // For "pico/bootrom_constants.h".
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/pico_bootrom/include",
+        "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/boot_bootrom_headers/include"
+
+      ],
+      "sourceFiles": [
+        "src/rp2350-riscv/debugger-entry-point.S",
+        "src/rp2350-riscv/trap-handler.cpp",
+        "src/rp2350-riscv/embedded-block-rp2350-riscv.c"
+      ],
+      "dependencies": [
+        "micro-os-plus.device"
+      ],
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_RISCV_ENABLED"
     },
   ]
 }

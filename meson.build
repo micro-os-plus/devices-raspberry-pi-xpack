@@ -23,6 +23,7 @@
 # `dependencies: [micro_os_plus_devices_raspberry_pi_micro_os_plus_devices_raspberry_pi_system_clock_dependency],`
 # `dependencies: [micro_os_plus_devices_raspberry_pi_vectors_rp2040_dependency],`
 # `dependencies: [micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency],`
+# `dependencies: [micro_os_plus_devices_raspberry_pi_vectors_rp2350_riscv_dependency],`
 # `dependencies: [micro_os_plus_devices_raspberry_pi_dependency],`
 
 # Note: the Meson configuration is provided only as a proof of concept;
@@ -135,9 +136,9 @@ _local_include_directories += [
 ]
 
 _local_sources += [
-  'src/vectors-rp2040.c',
+  'src/rp2040/vectors-rp2040.c',
   'src/system-rp2xxx.cpp',
-  'src/bs2_default_padded_checksummed.S',
+  'src/rp2040/bs2_default_padded_checksummed.S',
 ]
 
 _local_dependencies += [
@@ -187,9 +188,9 @@ _local_include_directories += [
 ]
 
 _local_sources += [
-  'src/vectors-rp2350.c',
+  'src/rp2350-arm/vectors-rp2350.c',
   'src/system-rp2xxx.cpp',
-  'src/embedded-block-rp2350-arm.c',
+  'src/rp2350-arm/embedded-block-rp2350-arm.c',
 ]
 
 _local_dependencies += [
@@ -218,6 +219,61 @@ foreach name : _local_sources + _local_compile_definitions + _local_compile_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_devices_raspberry_pi_vectors_rp2350_arm_dependency')
+
+# -----------------------------------------------------------------------------
+
+_local_compile_args = [] # Common C/C++ args.
+_local_compile_c_args = [] # C only args.
+_local_compile_cpp_args = [] # C++ only args.
+_local_include_directories = []
+_local_sources = []
+_local_compile_definitions = []
+_local_dependencies = []
+_local_link_args = []
+_local_link_with = []
+
+_local_include_directories += [
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/pico_bootrom/include',
+  '${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/boot_bootrom_headers/include',
+]
+
+_local_sources += [
+  'src/rp2350-riscv/debugger-entry-point.S',
+  'src/rp2350-riscv/trap-handler.cpp',
+  'src/rp2350-riscv/embedded-block-rp2350-riscv.c',
+]
+_local_compile_args += [
+  '-DNO_PICO_PLATFORM',
+]
+
+_local_dependencies += [
+  micro_os_plus_device_dependency,
+]
+
+# https://mesonbuild.com/Reference-manual_functions.html#declare_dependency
+micro_os_plus_devices_raspberry_pi_vectors_rp2350_riscv_dependency = declare_dependency(
+  include_directories: include_directories(_local_include_directories),
+  compile_args: _local_compile_args,
+  sources: files(_local_sources),
+  dependencies: _local_dependencies,
+  link_args: _local_link_args,
+  link_with: _local_link_with,
+)
+
+# Meson dependencies cannot differentiate between C and C++ compile args;
+# they are therefore exposed as separate variables alongside the dependency.
+micro_os_plus_devices_raspberry_pi_vectors_rp2350_riscv_dependency_compile_c_args = _local_compile_c_args
+micro_os_plus_devices_raspberry_pi_vectors_rp2350_riscv_dependency_compile_cpp_args = _local_compile_cpp_args
+
+foreach name : _local_include_directories
+  message('+ -I ' + name)
+endforeach
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+  message('+ ' + name)
+endforeach
+message('> micro_os_plus_devices_raspberry_pi_vectors_rp2350_riscv_dependency')
 
 # -----------------------------------------------------------------------------
 
