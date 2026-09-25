@@ -73,9 +73,9 @@
     // and located inside the parent. Due to current xcdl-export limitations,
     // they are temporarily placed outside their parent.
     {
-      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2040",
-      "display": "RP2040 vectors",
-      "description": "The RP2040 Cortex-M0+ interrupt vectors",
+      "id": "micro-os-plus.devices.raspberry-pi.rp2040-support",
+      "display": "RP2040 support",
+      "description": "The RP2040 Cortex-M0+ interrupt vectors and bootstrap",
       "publicIncludeFolders": [
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include",
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2040/Include",
@@ -89,12 +89,12 @@
       "dependencies": [
         "micro-os-plus.device"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040_SUPPORT_ENABLED"
     },
     {
-      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2350-arm",
-      "display": "RP2350 Cortex-M33 vectors",
-      "description": "The RP2350 Cortex-M33 core interrupt vectors",
+      "id": "micro-os-plus.devices.raspberry-pi.rp2350-arm-support",
+      "display": "RP2350 Cortex-M33 support",
+      "description": "The RP2350 Cortex-M33 core interrupt vectors and bootstrap",
       "publicIncludeFolders": [
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include",
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2350/Include",
@@ -109,12 +109,12 @@
       "dependencies": [
         "micro-os-plus.device"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED"
     },
     {
-      "id": "micro-os-plus.devices.raspberry-pi.vectors-rp2350-riscv",
+      "id": "micro-os-plus.devices.raspberry-pi.rp2350-riscv-support",
       "display": "RP2350 RISC-V support",
-      "description": "The RP2350 RISC-V core support",
+      "description": "The RP2350 RISC-V core support and bootstrap",
       "publicDefines": [
         "NO_PICO_PLATFORM"
       ],
@@ -139,7 +139,7 @@
       "dependencies": [
         "micro-os-plus.device"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_RISCV_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED"
     },
   ]
 }

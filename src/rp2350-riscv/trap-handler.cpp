@@ -18,7 +18,7 @@
 
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
     && defined( \
-        MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_RISCV_ENABLED)
+        MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -58,6 +58,6 @@ namespace device
 // ----------------------------------------------------------------------------
 
 #endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
-          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_RISCV_ENABLED) */
+          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED) */
 
 // ----------------------------------------------------------------------------

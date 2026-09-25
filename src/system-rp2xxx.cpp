@@ -17,8 +17,8 @@
 
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED)
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) \
-    || defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED)
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040__SUPPORT_ENABLED) \
+    || defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -43,8 +43,8 @@ SystemCoreClockUpdate (void)
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) || \
-          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2350_ARM_ENABLED)) */
+#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040__SUPPORT_ENABLED) || \
+          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED)) */
 
 #endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED)
 

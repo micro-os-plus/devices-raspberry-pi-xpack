@@ -21,7 +21,7 @@
 // ----------------------------------------------------------------------------
 
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
-    defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED)
+    defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040_SUPPORT_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -221,6 +221,6 @@ Default_Handler(void)
 // ----------------------------------------------------------------------------
 
 #endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && 
-          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_VECTORS_RP2040_ENABLED) */
+          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040_SUPPORT_ENABLED) */
 
 // ----------------------------------------------------------------------------

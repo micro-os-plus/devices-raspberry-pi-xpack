@@ -21,9 +21,9 @@
 # ~~~
 # target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk)
 # target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock)
-# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-vectors-rp2040)
-# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-vectors-rp2350-arm)
-# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-vectors-rp2350-riscv)
+# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-rp2040-support)
+# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-rp2350-arm-support)
+# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-rp2350-riscv-support)
 # target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi)
 # ~~~
 
@@ -141,12 +141,12 @@ message (
 # Visibility keywords: PRIVATE applies to the target itself; INTERFACE passes
 # properties up to targets that link against it; PUBLIC does both.
 add_library (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface INTERFACE
+  micro-os-plus-devices-raspberry-pi-rp2040-support-interface INTERFACE
   EXCLUDE_FROM_ALL
 )
 
 target_include_directories (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface
+  micro-os-plus-devices-raspberry-pi-rp2040-support-interface
   INTERFACE
     "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include"
     "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2040/Include"
@@ -154,19 +154,19 @@ target_include_directories (
 )
 
 target_sources (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface
+  micro-os-plus-devices-raspberry-pi-rp2040-support-interface
   INTERFACE "src/rp2040/vectors-rp2040.c" "src/system-rp2xxx.cpp"
             "src/rp2040/bs2_default_padded_checksummed.S"
 )
 
 target_link_libraries (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface
+  micro-os-plus-devices-raspberry-pi-rp2040-support-interface
   INTERFACE "micro-os-plus::device"
 )
 
 if (COMMAND xpack_display_target_lists)
   xpack_display_target_lists (
-    micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface
+    micro-os-plus-devices-raspberry-pi-rp2040-support-interface
   )
 endif ()
 
@@ -175,12 +175,12 @@ endif ()
 
 # https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
 add_library (
-  micro-os-plus::devices-raspberry-pi-vectors-rp2040 ALIAS
-  micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface
+  micro-os-plus::devices-raspberry-pi-rp2040-support ALIAS
+  micro-os-plus-devices-raspberry-pi-rp2040-support-interface
 )
 message (
   VERBOSE
-  "> micro-os-plus::devices-raspberry-pi-vectors-rp2040 -> micro-os-plus-devices-raspberry-pi-vectors-rp2040-interface"
+  "> micro-os-plus::devices-raspberry-pi-rp2040-support -> micro-os-plus-devices-raspberry-pi-rp2040-support-interface"
 )
 
 # -----------------------------------------------------------------------------
@@ -189,12 +189,12 @@ message (
 # Visibility keywords: PRIVATE applies to the target itself; INTERFACE passes
 # properties up to targets that link against it; PUBLIC does both.
 add_library (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface INTERFACE
+  micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface INTERFACE
   EXCLUDE_FROM_ALL
 )
 
 target_include_directories (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface
   INTERFACE
     "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include"
     "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2350/Include"
@@ -203,19 +203,19 @@ target_include_directories (
 )
 
 target_sources (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface
   INTERFACE "src/rp2350-arm/vectors-rp2350.c" "src/system-rp2xxx.cpp"
             "src/rp2350-arm/embedded-block-rp2350-arm.c"
 )
 
 target_link_libraries (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface
   INTERFACE "micro-os-plus::device"
 )
 
 if (COMMAND xpack_display_target_lists)
   xpack_display_target_lists (
-    micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface
+    micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface
   )
 endif ()
 
@@ -224,12 +224,12 @@ endif ()
 
 # https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
 add_library (
-  micro-os-plus::devices-raspberry-pi-vectors-rp2350-arm ALIAS
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface
+  micro-os-plus::devices-raspberry-pi-rp2350-arm-support ALIAS
+  micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface
 )
 message (
   VERBOSE
-  "> micro-os-plus::devices-raspberry-pi-vectors-rp2350-arm -> micro-os-plus-devices-raspberry-pi-vectors-rp2350-arm-interface"
+  "> micro-os-plus::devices-raspberry-pi-rp2350-arm-support -> micro-os-plus-devices-raspberry-pi-rp2350-arm-support-interface"
 )
 
 # -----------------------------------------------------------------------------
@@ -238,12 +238,12 @@ message (
 # Visibility keywords: PRIVATE applies to the target itself; INTERFACE passes
 # properties up to targets that link against it; PUBLIC does both.
 add_library (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface INTERFACE
+  micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface INTERFACE
   EXCLUDE_FROM_ALL
 )
 
 target_include_directories (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface
   INTERFACE
     "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include"
     "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include"
@@ -252,25 +252,25 @@ target_include_directories (
 )
 
 target_sources (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface
   INTERFACE "src/rp2350-riscv/debugger-entry-point.S"
             "src/rp2350-riscv/trap-handler.cpp"
             "src/rp2350-riscv/embedded-block-rp2350-riscv.c"
 )
 
 target_compile_definitions (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface
   INTERFACE "NO_PICO_PLATFORM"
 )
 
 target_link_libraries (
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface
+  micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface
   INTERFACE "micro-os-plus::device"
 )
 
 if (COMMAND xpack_display_target_lists)
   xpack_display_target_lists (
-    micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface
+    micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface
   )
 endif ()
 
@@ -279,12 +279,12 @@ endif ()
 
 # https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
 add_library (
-  micro-os-plus::devices-raspberry-pi-vectors-rp2350-riscv ALIAS
-  micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface
+  micro-os-plus::devices-raspberry-pi-rp2350-riscv-support ALIAS
+  micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface
 )
 message (
   VERBOSE
-  "> micro-os-plus::devices-raspberry-pi-vectors-rp2350-riscv -> micro-os-plus-devices-raspberry-pi-vectors-rp2350-riscv-interface"
+  "> micro-os-plus::devices-raspberry-pi-rp2350-riscv-support -> micro-os-plus-devices-raspberry-pi-rp2350-riscv-support-interface"
 )
 
 # -----------------------------------------------------------------------------
