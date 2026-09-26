@@ -19,8 +19,8 @@
 # This creates libraries that can be linked to a target with:
 #
 # ~~~
-# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk)
-# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock)
+# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-raspberry-pi-sdk-sbrk)
+# target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-raspberry-pi-system-clock)
 # target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-rp2040-support)
 # target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-rp2350-arm-support)
 # target_link_libraries(your-target PUBLIC micro-os-plus::devices-raspberry-pi-rp2350-riscv-support)
@@ -69,19 +69,18 @@ endif ()
 # Visibility keywords: PRIVATE applies to the target itself; INTERFACE passes
 # properties up to targets that link against it; PUBLIC does both.
 add_library (
-  micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk-interface
-  INTERFACE
+  micro-os-plus-devices-raspberry-pi-raspberry-pi-sdk-sbrk-interface INTERFACE
   EXCLUDE_FROM_ALL
 )
 
 target_sources (
-  micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk-interface
+  micro-os-plus-devices-raspberry-pi-raspberry-pi-sdk-sbrk-interface
   INTERFACE "src/_sbrk.c"
 )
 
 if (COMMAND xpack_display_target_lists)
   xpack_display_target_lists (
-    micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk-interface
+    micro-os-plus-devices-raspberry-pi-raspberry-pi-sdk-sbrk-interface
   )
 endif ()
 
@@ -90,13 +89,12 @@ endif ()
 
 # https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
 add_library (
-  micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk
-  ALIAS
-  micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk-interface
+  micro-os-plus::devices-raspberry-pi-raspberry-pi-sdk-sbrk ALIAS
+  micro-os-plus-devices-raspberry-pi-raspberry-pi-sdk-sbrk-interface
 )
 message (
   VERBOSE
-  "> micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk -> micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk-interface"
+  "> micro-os-plus::devices-raspberry-pi-raspberry-pi-sdk-sbrk -> micro-os-plus-devices-raspberry-pi-raspberry-pi-sdk-sbrk-interface"
 )
 
 # -----------------------------------------------------------------------------
@@ -105,19 +103,18 @@ message (
 # Visibility keywords: PRIVATE applies to the target itself; INTERFACE passes
 # properties up to targets that link against it; PUBLIC does both.
 add_library (
-  micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock-interface
-  INTERFACE
-  EXCLUDE_FROM_ALL
+  micro-os-plus-devices-raspberry-pi-raspberry-pi-system-clock-interface
+  INTERFACE EXCLUDE_FROM_ALL
 )
 
 target_sources (
-  micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock-interface
+  micro-os-plus-devices-raspberry-pi-raspberry-pi-system-clock-interface
   INTERFACE "src/system-clock.cpp"
 )
 
 if (COMMAND xpack_display_target_lists)
   xpack_display_target_lists (
-    micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock-interface
+    micro-os-plus-devices-raspberry-pi-raspberry-pi-system-clock-interface
   )
 endif ()
 
@@ -126,13 +123,12 @@ endif ()
 
 # https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
 add_library (
-  micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock
-  ALIAS
-  micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock-interface
+  micro-os-plus::devices-raspberry-pi-raspberry-pi-system-clock ALIAS
+  micro-os-plus-devices-raspberry-pi-raspberry-pi-system-clock-interface
 )
 message (
   VERBOSE
-  "> micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock -> micro-os-plus-devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock-interface"
+  "> micro-os-plus::devices-raspberry-pi-raspberry-pi-system-clock -> micro-os-plus-devices-raspberry-pi-raspberry-pi-system-clock-interface"
 )
 
 # -----------------------------------------------------------------------------
@@ -307,11 +303,9 @@ target_sources (
 
 target_link_libraries (
   micro-os-plus-devices-raspberry-pi-interface
-  INTERFACE
-    "micro-os-plus::diag-trace"
-    "micro-os-plus::architecture"
-    "micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-sdk-sbrk"
-    "micro-os-plus::devices-raspberry-pi-micro-os-plus-devices-raspberry-pi-system-clock"
+  INTERFACE "micro-os-plus::diag-trace" "micro-os-plus::architecture"
+            "micro-os-plus::devices-raspberry-pi-raspberry-pi-sdk-sbrk"
+            "micro-os-plus::devices-raspberry-pi-raspberry-pi-system-clock"
 )
 
 if (COMMAND xpack_display_target_lists)

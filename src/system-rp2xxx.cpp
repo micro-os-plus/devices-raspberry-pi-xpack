@@ -17,12 +17,12 @@
 
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED)
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040__SUPPORT_ENABLED) \
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040_SUPPORT_ENABLED) \
     || defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED)
 
 // ----------------------------------------------------------------------------
 
-// system_RP2040.h (pulled in via micro-os-plus/device.h, RP2040.h) declares
+// system_RP2xxx.h (pulled in via micro-os-plus/device.h, RP2040.h) declares
 // SystemCoreClock/SystemInit/SystemCoreClockUpdate inside its own
 // `#ifdef __cplusplus extern "C"` block, so the definitions below must be
 // given matching C language linkage.
@@ -43,7 +43,7 @@ SystemCoreClockUpdate (void)
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040__SUPPORT_ENABLED) || \
+#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040_SUPPORT_ENABLED) || \
           defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED)) */
 
 #endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED)

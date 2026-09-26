@@ -65,7 +65,7 @@
       "clang-format": "node scripts/clang-format.mjs",
       "cmake-format": "node scripts/cmake-format.mjs",
       "jsonc-format": "node scripts/jsonc-format.mjs",
-      "xcdl-export": "node scripts/xcdl-export.mjs xcdl-package.json*",
+      "xcdl-export": "node scripts/xcdl-export.mjs --skip-meson xcdl-package.json*",
       "prettier": "prettier scripts tests/scripts --write --config config/.prettierrc.json --ignore-path config/.prettierignore"
     }
   },

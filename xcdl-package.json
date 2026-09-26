@@ -50,7 +50,7 @@
       ],
       "cdlComponents": [
         {
-          "id": "micro-os-plus.devices.raspberry-pi.sdk-sbrk",
+          "id": "raspberry-pi.sdk-sbrk",
           "display": "SDK _sbrk()",
           "description": "The SDK _sbrk() implementation for the RPxxxx",
           "sourceFiles": [
@@ -59,7 +59,7 @@
           // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED"
         },
         {
-          "id": "micro-os-plus.devices.raspberry-pi.system-clock",
+          "id": "raspberry-pi.system-clock",
           "display": "System clock",
           "description": "The system clock implementation for the RPxxxx",
           "sourceFiles": [
@@ -124,12 +124,10 @@
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/hardware_regs/include",
         // /"${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2350/pico_platform/include",
         // /"${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include",
-
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/common/boot_picobin_headers/include",
         // For "pico/bootrom_constants.h".
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/pico_bootrom/include",
         "${CMAKE_BINARY_DIR}/xpacks/@xpack-3rd-party/raspberrypi-pico-sdk/src/rp2_common/boot_bootrom_headers/include"
-
       ],
       "sourceFiles": [
         "src/rp2350-riscv/debugger-entry-point.S",

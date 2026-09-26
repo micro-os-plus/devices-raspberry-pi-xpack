@@ -178,33 +178,18 @@ dependency with:
 ```cmake
 target_link_libraries(your-target PRIVATE
 
-  micro-os-plus::devices-raspberry-pi
+  micro-os-plus::device
 )
 ```
 
-#### meson
+The platform must also link the following SDK libraries:
 
-To integrate the devices-raspberry-pi source library into a meson application,
-add this folder to the build:
-
-```meson
-subdir('xpacks/@micro-os-plus/devices-raspberry-pi')
-```
-
-The result is a dependency object that can be added
-to an application with:
-
-```meson
-exe = executable(
-  your-target,
-  link_with: [
-    # Nothing, not static.
-  ],
-  dependencies: [
-    micro_os_plus_devices_raspberry_pi_dependency,
-  ]
-)
-```
+- cmsis_core
+- pico_standard_link
+- pico_crt0
+- pico_runtime_init
+- hardware_gpio
+- hardware_clocks
 
 ### Examples
 

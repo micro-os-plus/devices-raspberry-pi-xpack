@@ -31,7 +31,6 @@
 #endif // defined(__GNUC__)
 
 #include "hardware/platform_defs.h"
-#include "hardware/regs/addressmap.h"
 #include "hardware/regs/clocks.h"
 #include "hardware/regs/pll.h"
 #include "hardware/regs/resets.h"
