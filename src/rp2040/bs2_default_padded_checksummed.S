@@ -11,8 +11,8 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
-    defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040)
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
+    && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040)
 
 // ----------------------------------------------------------------------------
 

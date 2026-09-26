@@ -16,7 +16,7 @@
 // ----------------------------------------------------------------------------
 
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-    && (defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED))
+    && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -39,6 +39,7 @@
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
 
 #include "micro-os-plus/rp2350-riscv/registers.h"
+#include "hardware/regs/addressmap.h"
 
 #endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
 
@@ -380,6 +381,6 @@ namespace device
 // ----------------------------------------------------------------------------
 
 #endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-    && (defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED) */
+          && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED) */
 
 // ----------------------------------------------------------------------------

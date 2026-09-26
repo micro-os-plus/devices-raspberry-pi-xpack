@@ -57,7 +57,7 @@ namespace device
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
-          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED) */
+#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
+          && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED) */
 
 // ----------------------------------------------------------------------------

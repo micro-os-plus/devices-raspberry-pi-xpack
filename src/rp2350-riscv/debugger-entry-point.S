@@ -16,8 +16,8 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
-    defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
+#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
+    && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
 
 // ----------------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ _debugger_entry_point:
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) && \
-          defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV) */
+#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
+          && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV) */
 
 // ----------------------------------------------------------------------------
