@@ -11,12 +11,15 @@
 
 // ----------------------------------------------------------------------------
 
-/* 
- * The `_sbrk()` implementation below is copied, with only cosmetic
- * formatting changes, from the Raspberry Pi Pico SDK
- * (`src/rp2_common/pico_clib_interface/newlib_interface.c`), reused here
- * because this platform does not link the SDK's `pico_clib_interface`
- * (it provides its own µOS++ startup/runtime instead):
+/*
+ * The `_sbrk()` implementation below is copied from the Raspberry Pi
+ * Pico SDK (`src/rp2_common/pico_clib_interface/newlib_interface.c`),
+ * reused here because this platform does not link the SDK's
+ * `pico_clib_interface` (it provides its own µOS++ startup/runtime
+ * instead). Apart from cosmetic formatting, the only change is that
+ * `errno` is set to `ENOMEM` on failure (the SDK leaves that line
+ * commented out), as the POSIX `sbrk()` contract requires and as the
+ * µOS++ `startup` implementation does:
  *
  * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
  *
@@ -26,6 +29,12 @@
 // ----------------------------------------------------------------------------
 
 #include "micro-os-plus/device.h"
+
+#if __has_include("micro-os-plus/startup-defines.h")
+#include "micro-os-plus/startup-defines.h"
+#endif // __has_include("micro-os-plus/startup-defines.h")
+
+#include <errno.h>
 
 // ----------------------------------------------------------------------------
 
@@ -49,6 +58,26 @@ extern char end; /* Set by linker.  */
 void*
 _sbrk (int incr);
 
+/**
+ * @brief Extend the heap (newlib `sbrk()` syscall stub).
+ * @param [in] incr Number of bytes to add to the current heap break.
+ * @return A pointer to the start of the newly allocated block, or
+ *  `(void*) -1` with `errno` set to `ENOMEM` if the request cannot
+ *  be satisfied.
+ *
+ * @details
+ * Grows a heap tracked in a function-local `static` pointer, seeded
+ * from `end` on the first call and bounded by `__StackLimit` (both
+ * defined by the Pico SDK linker script). With
+ * `PICO_USE_OPTIMISTIC_SBRK`, a request that does not fit is clipped
+ * to the remaining space, and only a request made when the heap is
+ * already full fails.
+ *
+ * Setting `errno` is the only functional difference from the SDK
+ * original; without it, code that inspects `errno` after a failed
+ * allocation (for example the libstdc++ out-of-memory tests) sees
+ * a stale value.
+ */
 __attribute__ ((weak)) void*
 _sbrk (int incr)
 {
@@ -66,11 +95,12 @@ _sbrk (int incr)
 #if defined(PICO_USE_OPTIMISTIC_SBRK) && PICO_USE_OPTIMISTIC_SBRK
       if (heap_end == &__StackLimit)
         {
-          //        errno = ENOMEM;
+          errno = ENOMEM; // Commented out in the SDK original.
           return (char*)-1;
         }
       next_heap_end = &__StackLimit;
 #else
+      errno = ENOMEM; // Not present in the SDK original.
       return (char*)-1;
 #endif
     }
