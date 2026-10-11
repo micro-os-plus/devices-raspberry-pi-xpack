@@ -34,7 +34,7 @@
 
 #if !defined(__ASSEMBLER__)
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040)
+#if defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2040)
 
 #if defined(__GNUC__)
 #pragma GCC diagnostic push
@@ -48,7 +48,7 @@
 
 #include "RP2040.h"
 
-#elif defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_ARM)
+#elif defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_ARM)
 
 #if defined(__GNUC__)
 #pragma GCC diagnostic push
@@ -65,7 +65,7 @@
 
 #include "RP2350.h"
 
-#elif defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
+#elif defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_RISCV)
 
 // Unlike the sibling SDK-linked `raspberry-pi-pico-2-riscv-sdk` platform,
 // this device.h does not include the Pico SDK's `hardware/hazard3.h`
@@ -86,7 +86,7 @@
 
 #error "Unsupported Raspberry Pi core"
 
-#endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RPxxxx)
+#endif // defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RPxxxx)
 
 #if defined(__GNUC__)
 #pragma GCC diagnostic pop
@@ -102,7 +102,7 @@ extern device::system_clock system_clock;
 
 #endif // defined(__cplusplus)
 
-#endif // !defined(__ASSEMBLY__)
+#endif // !defined(__ASSEMBLER__)
 
 // ----------------------------------------------------------------------------
 

@@ -15,8 +15,8 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-    && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
+#if defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_ENABLED) \
+    && defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_RISCV)
 
 // ----------------------------------------------------------------------------
 
@@ -153,7 +153,7 @@ __attribute__ ((section (".embedded_block"), used,
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-          && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV) */
+#endif /* defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_ENABLED) \
+          && defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_RISCV) */
 
 // ----------------------------------------------------------------------------

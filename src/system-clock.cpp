@@ -15,8 +15,8 @@
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-    && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED)
+#if defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_ENABLED) \
+    && defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -36,12 +36,12 @@
 #include "hardware/regs/resets.h"
 #include "hardware/regs/xosc.h"
 
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
+#if defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_RISCV)
 
 #include "micro-os-plus/rp2350-riscv/registers.h"
 #include "hardware/regs/addressmap.h"
 
-#endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
+#endif // defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_RISCV)
 
 #if defined(__GNUC__)
 #pragma GCC diagnostic pop
@@ -69,7 +69,7 @@ device::system_clock system_clock;
 
 namespace device
 {
-#if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040)
+#if defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2040)
 
   // After reset, the RP2040 clk_sys is left running from the
   // uncalibrated ring oscillator (ROSC). `system_clock::initialise()`
@@ -92,8 +92,8 @@ namespace device
   static constexpr std::uint32_t pll_sys_postdiv1 = 6;
   static constexpr std::uint32_t pll_sys_postdiv2 = 2;
 
-#elif defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_ARM) \
-    || defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_RISCV)
+#elif defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_ARM) \
+    || defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_RISCV)
 
   // After reset, the RP2350 clk_sys is left running from the
   // uncalibrated ring oscillator (ROSC). `system_clock::initialise()`
@@ -119,7 +119,7 @@ namespace device
 
 #else
 #error "Unsupported Raspberry Pi core"
-#endif // defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RPxxxx)
+#endif // defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RPxxxx)
 
 // The CMSIS core headers (pulled in via RP2040.h/RP2350.h in
 // micro-os-plus/device.h) define __CM_CMSIS_VERSION; when present, the
@@ -380,7 +380,7 @@ namespace device
 
 // ----------------------------------------------------------------------------
 
-#endif /* defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED) \
-          && defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED) */
+#endif /* defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_ENABLED) \
+          && defined(MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED) */
 
 // ----------------------------------------------------------------------------
