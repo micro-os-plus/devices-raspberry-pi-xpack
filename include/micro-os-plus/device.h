@@ -32,7 +32,7 @@
 
 #include "micro-os-plus/architecture.h"
 
-#if !defined(__ASSEMBLY__)
+#if !defined(__ASSEMBLER__)
 
 #if defined(MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040)
 
