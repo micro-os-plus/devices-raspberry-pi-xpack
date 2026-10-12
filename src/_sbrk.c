@@ -45,7 +45,8 @@
 // heap region (`end`..`__StackLimit` from the SDK linker script here,
 // `__heap_begin__`..`__heap_end__` from the µOS++ linker scripts there).
 #if defined(MICRO_OS_PLUS_STARTUP_SBRK_ENABLED)
-#error "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SDK_SBRK_ENABLED and MICRO_OS_PLUS_STARTUP_SBRK_ENABLED are mutually exclusive"
+#error \
+    "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SDK_SBRK_ENABLED and MICRO_OS_PLUS_STARTUP_SBRK_ENABLED are mutually exclusive"
 #endif // defined(MICRO_OS_PLUS_STARTUP_SBRK_ENABLED)
 
 // ----------------------------------------------------------------------------
