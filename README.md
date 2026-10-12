@@ -178,7 +178,7 @@ dependency with:
 ```cmake
 target_link_libraries(your-target PRIVATE
 
-  micro-os-plus::device
+  micro-os-plus::device-raspberry-pi
 )
 ```
 
