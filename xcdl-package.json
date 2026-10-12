@@ -6,8 +6,7 @@
   "description": "Raspberry Pi device components",
   "cdlComponents": [
     {
-      "id": "micro-os-plus.devices.raspberry-pi",
-      "alias": "micro-os-plus.device",
+      "id": "micro-os-plus.device.raspberry-pi",
       "display": "Raspberry Pi devices",
       "description": "The Raspberry Pi devices definitions",
       "publicIncludeFolders": [
@@ -25,13 +24,13 @@
         // Pico SDK, but can't represent here.
       ],
       "implementedInterfaces": [
-        "micro-os-plus.device"
+        "micro-os-plus.device-raspberry-pi"
       ],
       "generatedFile": {
         "type": "c-header",
         "filePath": "{{buildFolderPath}}/generated/include/micro-os-plus/device-defines.h"
       },
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_ENABLED",
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_ENABLED",
       "cdlOptions": [
         {
           "id": "core",
@@ -43,29 +42,29 @@
             "rp2350-arm",
             "rp2350-riscv"
           ],
-          // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE"
-          // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2040
-          // MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_CORE_RP2350_ARM
+          // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE"
+          // MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2040
+          // MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_CORE_RP2350_ARM
         }
       ],
       "cdlComponents": [
         {
-          "id": "raspberry-pi.sdk-sbrk",
+          "id": "sdk-sbrk",
           "display": "SDK _sbrk()",
           "description": "The SDK _sbrk() implementation for the RPxxxx",
           "sourceFiles": [
             "src/_sbrk.c"
           ],
-          // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SDK_SBRK_ENABLED"
+          // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SDK_SBRK_ENABLED"
         },
         {
-          "id": "raspberry-pi.system-clock",
+          "id": "system-clock",
           "display": "System clock",
           "description": "The system clock implementation for the RPxxxx",
           "sourceFiles": [
             "src/system-clock.cpp"
           ],
-          // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED"
+          // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_SYSTEM_CLOCK_ENABLED"
         },
       ]
     },
@@ -73,7 +72,7 @@
     // and located inside the parent. Due to current xcdl-export limitations,
     // they are temporarily placed outside their parent.
     {
-      "id": "micro-os-plus.devices.raspberry-pi.rp2040-support",
+      "id": "micro-os-plus.device.raspberry-pi.rp2040-support",
       "display": "RP2040 support",
       "description": "The RP2040 Cortex-M0+ interrupt vectors and bootstrap",
       "publicIncludeFolders": [
@@ -87,12 +86,12 @@
         "src/rp2040/bs2_default_padded_checksummed.S"
       ],
       "dependencies": [
-        "micro-os-plus.device"
+        "micro-os-plus.device-raspberry-pi"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2040_SUPPORT_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_RP2040_SUPPORT_ENABLED"
     },
     {
-      "id": "micro-os-plus.devices.raspberry-pi.rp2350-arm-support",
+      "id": "micro-os-plus.device.raspberry-pi.rp2350-arm-support",
       "display": "RP2350 Cortex-M33 support",
       "description": "The RP2350 Cortex-M33 core interrupt vectors and bootstrap",
       "publicIncludeFolders": [
@@ -107,12 +106,12 @@
         "src/rp2350-arm/embedded-block-rp2350-arm.c"
       ],
       "dependencies": [
-        "micro-os-plus.device"
+        "micro-os-plus.device-raspberry-pi"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_RP2350_ARM_SUPPORT_ENABLED"
     },
     {
-      "id": "micro-os-plus.devices.raspberry-pi.rp2350-riscv-support",
+      "id": "micro-os-plus.device.raspberry-pi.rp2350-riscv-support",
       "display": "RP2350 RISC-V support",
       "description": "The RP2350 RISC-V core support and bootstrap",
       "publicDefines": [
@@ -135,9 +134,9 @@
         "src/rp2350-riscv/embedded-block-rp2350-riscv.c"
       ],
       "dependencies": [
-        "micro-os-plus.device"
+        "micro-os-plus.device-raspberry-pi"
       ],
-      // "defaultDefine": "MICRO_OS_PLUS_DEVICES_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_DEVICE_RASPBERRY_PI_RP2350_RISCV_SUPPORT_ENABLED"
     },
   ]
 }
