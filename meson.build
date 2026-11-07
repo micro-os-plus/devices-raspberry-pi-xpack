@@ -73,7 +73,7 @@ micro_os_plus_device_raspberry_pi_sdk_sbrk_dependency_compile_cpp_args = _local_
 foreach name : _local_include_directories
   message('+ -I ' + name)
 endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args + _local_link_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_device_raspberry_pi_sdk_sbrk_dependency')
@@ -112,7 +112,7 @@ micro_os_plus_device_raspberry_pi_system_clock_dependency_compile_cpp_args = _lo
 foreach name : _local_include_directories
   message('+ -I ' + name)
 endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args + _local_link_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_device_raspberry_pi_system_clock_dependency')
@@ -170,7 +170,7 @@ micro_os_plus_device_raspberry_pi_rp2040_support_dependency_compile_cpp_args = _
 foreach name : _local_include_directories
   message('+ -I ' + name)
 endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args + _local_link_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_device_raspberry_pi_rp2040_support_dependency')
@@ -229,7 +229,7 @@ micro_os_plus_device_raspberry_pi_rp2350_arm_support_dependency_compile_cpp_args
 foreach name : _local_include_directories
   message('+ -I ' + name)
 endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args + _local_link_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_device_raspberry_pi_rp2350_arm_support_dependency')
@@ -258,7 +258,8 @@ _local_sources += [
   'src/rp2350-riscv/trap-handler.cpp',
   'src/rp2350-riscv/embedded-block-rp2350-riscv.c',
 ]
-_local_compile_args += [
+
+_local_compile_definitions += [
   '-DNO_PICO_PLATFORM',
 ]
 
@@ -291,7 +292,7 @@ micro_os_plus_device_raspberry_pi_rp2350_riscv_support_dependency_compile_cpp_ar
 foreach name : _local_include_directories
   message('+ -I ' + name)
 endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args + _local_link_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_device_raspberry_pi_rp2350_riscv_support_dependency')
@@ -354,7 +355,7 @@ micro_os_plus_device_raspberry_pi_dependency_compile_cpp_args = _local_compile_c
 foreach name : _local_include_directories
   message('+ -I ' + name)
 endforeach
-foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args
+foreach name : _local_sources + _local_compile_definitions + _local_compile_args + _local_compile_c_args + _local_compile_cpp_args + _local_link_args
   message('+ ' + name)
 endforeach
 message('> micro_os_plus_device_raspberry_pi_dependency')

@@ -66,7 +66,8 @@
       "cmake-format": "node maintenance/scripts/cmake-format.mjs",
       "jsonc-format": "node maintenance/scripts/jsonc-format.mjs",
       "xcdl-export": "node maintenance/scripts/xcdl-export.mjs xcdl-package.json*",
-      "prettier": "prettier scripts tests/scripts --write --config config/.prettierrc.json --ignore-path config/.prettierignore"
+      "prettier": "prettier scripts tests/scripts --write --config config/.prettierrc.json --ignore-path config/.prettierignore",
+      "xpm-link": "xpm link"
     }
   },
   "engines": {
