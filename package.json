@@ -19,7 +19,6 @@
     "url": "git+https://github.com/micro-os-plus/devices-raspberry-pi-xpack.git"
   },
   "homepage": "https://micro-os-plus.github.io/devices-raspberry-pi-xpack/",
-  "homepagePreview": "https://micro-os-plus.github.io/devices-raspberry-pi-xpack-webpreview/",
   "bugs": {
     "url": "https://github.com/micro-os-plus/devices-raspberry-pi-xpack/issues"
   },
