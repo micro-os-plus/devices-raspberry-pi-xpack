@@ -103,10 +103,12 @@ folder, and add corresponding entries in the top CMake and Meson configurations.
 Avoid running `find /` commands that search the entire filesystem, as this 
 always timeouts.
 
-## Tools binaries
+## Tool Binaries
 
-The tools binaries required for the project are located in the `xpacks/.bin`
-folder within the build folders and the project root.
+The compiler and the other binary tools are installed in the
+`build/<configuration>/xpacks/.bin` folder of each build configuration,
+or in the `<project>/xpacks/.bin` folder of the project root; the
+JavaScript tools are in the `node_modules/.bin` folders.
 
 ## Testing
 
@@ -133,35 +135,53 @@ powered up, with the command:
 QEMU tests can be done directly, without confirmation that the board is
 powered up.
 
-## Code Review
+## Reviews
 
-- When asked for a code review, follow the separate instructions in
-`.github/skills/code-review/SKILL.md` for a thorough and uncompromising
-review of the codebase.
+When asked for one of the following reviews, follow the separate
+instructions of the corresponding skill:
 
-## Commit Message Guidelines
+- a design review, or an API review:
+  `.github/skills/design-review/SKILL.md`;
+- a code review: `.github/skills/code-review/SKILL.md`;
+- a review of the Doxygen comments:
+  `.github/skills/doxygen-review/SKILL.md`;
+- a consistency check: `.github/skills/consistency-check/SKILL.md`.
 
-When making changes to the codebase, follow these guidelines for version control:
+The review skills share the rules in `.github/skills/review-common.md`,
+and all the skills read the facts of this project in
+`.github/skills/project.md`. Most skills are generated from the
+`npm-packages-helper` templates (`npm run generate-top-commons`), so
+the project-specific rules go in `.github/skills/project.md`, or in a
+`project.md` file in the folder of the skill, never in a generated
+`SKILL.md` (see `.github/skills/README.md`).
 
-- Use the imperative mood in the subject line (e.g., "Fix bug" instead of "Fixed bug" or "Fixes bug").
-- Limit the subject line to 50 characters.
-- Capitalize the subject line.
-- Do not end the subject line with a period.
-- Use the body to explain what and why vs. how.
-- Wrap the body at 72 characters.
-- Include references to relevant issues or pull requests if applicable.
+## Git Commits
+
+- When asked to commit, or to write a commit message, follow the separate
+  instructions in `.github/skills/github-commit/SKILL.md`, which cover the
+  commit message format, the GitHub issue references, and the closing
+  comment of the GitHub issue.
+- Do not commit without user review and approval.
+
+## Issues
+
+- When asked to open an issue, follow the separate instructions in
+  `.github/skills/create-github-issue/SKILL.md`.
+- After committing a fix for a GitHub issue, add the closing comment to
+  that issue, as described in `.github/skills/github-commit/SKILL.md`
+  ("Issue Comment").
 
 ## xcdl
 
-The `xcdl` tool is not yet available; `xcdl-package.jsonc` is used only to
-generate the top-level CMake and Meson files (`xpm run xcdl-export`). Only
-`publicIncludeFolders`, `sourceFiles`, and `dependencies` affect the
-generated files; all other properties (`generatedFile`, `activeIf`,
-`defaultValue`, `implements`, and the commented-out `defaultDefine`
-entries) are informative only.
+When working with `xcdl-package.jsonc`, or when adding, removing, or
+renaming a source file, an include folder, a compiler or linker option,
+or a dependency, follow the separate instructions in
+`.github/skills/xcdl/SKILL.md`.
 
-In particular, no `*-defines.h` file is generated, so a commented-out
-`defaultDefine` does not mean that the macro is disabled. Its name
-documents the macro that the application must define itself, either in
-`micro-os-plus/project-config.h` or in project specific header files 
-(e.g., `micro-os-plus/startup-defines.h`).
+## Verbal Questions
+
+When more input from the user is required, first ask a short version
+of the question aloud, with the macOS `say` program, and only then show
+the full question in the chat window (in the text of the reply, or in a
+question dialog), so that the spoken question draws the attention of
+the user before the text appears.
